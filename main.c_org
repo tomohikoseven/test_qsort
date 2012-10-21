@@ -1,0 +1,47 @@
+#include<stdio.h>
+#include<string.h>
+
+#define MAX_NUM 3
+#define MAX_LEN 6
+
+void
+_print_local( char name[][MAX_LEN] )
+{
+    int ret = 0;
+    int i   = 0;
+
+    for( i = 0; i < MAX_NUM; i++ )
+    {
+        printf( "name[%d] = %s\n", i, name[i] );
+    }
+}
+
+int
+func_cmp( const void *name1, const void *name2 )
+{
+    return strcmp( name1, name2 );
+}
+
+int
+main(void)
+{
+
+    char name[MAX_NUM][MAX_LEN];
+
+    memset( name, 0x00, MAX_NUM * MAX_LEN );
+
+    strncpy( name[0], "John",   MAX_LEN );
+    strncpy( name[1], "Bob",    MAX_LEN );
+    strncpy( name[2], "Natry",  MAX_LEN );
+
+    _print_local(name);
+
+    qsort(  name,
+            sizeof(name)/sizeof(name[0]),
+            sizeof(name[0]),
+            func_cmp );
+
+    _print_local(name);
+
+    return 0;
+}
